@@ -15,7 +15,14 @@ module.exports = {
 	module:{
 		rules:[
 			{
-		        test: /\.(css|less)$/,
+		        test: /\.css$/,
+		        use: [
+		           { loader: "style-loader" },
+		           { loader: "css-loader" }
+		        ]
+		    },
+			{
+		        test: /\.less$/,
 		        use: [
 		           { loader: "style-loader" },
 		           { loader: "css-loader" },
@@ -23,7 +30,17 @@ module.exports = {
 		        ]
 		    },
 		    {
-		        test: /\.(png|jpe?g|gif|woff|woff2|eot|ttf|svg)$/,
+		        test: /\.(png|jpe?g|gif|svg)$/,
+		        use: [
+		            {
+		            	loader: 'url-loader',
+		            	options: {
+		              		limit: 8192
+		            	}
+		          	}
+		        ]
+		    },{
+		        test: /\.(woff|woff2|eot|ttf)$/,
 		        use: [
 		            {
 		            	loader: 'url-loader',
@@ -67,5 +84,9 @@ module.exports = {
 				target:'https://api.douban.com/',
 			}
 		}
+	},
+	resolve: { 
+		alias: { 'vue': 'vue/dist/vue.js' } 
 	}
+
 }

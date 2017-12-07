@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "webpack-dev-server --inline --hot --open"
+    "test": ".\\node_modules\\.bin\\webpack-dev-server --inline --hot --open"
   },
   "keywords": [],
   "author": "",
@@ -31,12 +31,9 @@
   },
   "dependencies": {
     "axios": "^0.17.1",
-    "element-ui": "^2.0.7",
     "mint-ui": "^2.2.10",
     "mui": "^0.0.1",
-    "nui": "^0.0.9",
     "vue": "^2.5.3",
-    "vue-concise-slider": "^2.3.0",
     "vue-router": "^3.0.1"
   }
 }

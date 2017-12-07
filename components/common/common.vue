@@ -1,7 +1,9 @@
 <template>
-	<div>
+	<div class="commom_box">
 		<mt-header fixed title="主页"></mt-header>
+		
 		<router-view></router-view>
+		
 		<!-- tab bar -->
 		<nav class="mui-bar mui-bar-tab">
 			<router-link :to="{name:'home'}" class="mui-tab-item " href="#tabbar">
@@ -35,3 +37,11 @@
 		}
 	}
 </script>
+<style scoped>
+	.commom_box{
+		height: 100%;
+	}
+	.mui-icon::before{
+		font-size: 16px
+	}
+</style>

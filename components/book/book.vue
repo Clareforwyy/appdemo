@@ -1,36 +1,35 @@
 <template>
 	<div>
-		<topbar :message="msg"></topbar>
+		<header class="mui-bar mui-bar-nav">
+			<router-link :to="{name:'home'}" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></router-link >
+			<h1 class="mui-title">新闻晚知道</h1>
+		</header>
 		<ul class="mui-table-view">
 			<li class="mui-table-view-cell mui-media" v-for="(item , index) in news" :key="index">
-				<router-link :to="{name:'newdetail',params:{newid:item.id}}">
+				<a href="javascript:;">
 					<img class="mui-media-object mui-pull-left" :src="item.url">
 					<div class="mui-media-body">
 						{{item.source}}
 						<p class="mui-ellipsis">{{item.title}}</p>
 					</div>
 					<p class="count_and_time">热度：{{item.tcount}} <span>{{item.ptime}}</span></p>
-				</router-link>
+				</a>
 			</li>
 		</ul>
 	</div>
 </template>
 <script>
-	import topbar from '../common/navbar.vue';
 	export default {
 		data(){
 			return {
-				news:[],
-				msg:'新闻列表'
+				news:[]
 			}
-		},
-		components:{
-			topbar
 		},
 		created(){
 			
 			this.$ajax.get(this.$HttpConfig.NEWSLIST)
 				.then((res)=>{
+					console.log(res.data)
 				    this.news = res.data.list;
 			  	})
 			  	.catch((error)=>{
@@ -42,7 +41,6 @@
 </script>
 <style scoped>
 	.mui-table-view{
-		font-family: "微软雅黑";
 		margin-top: 40px;
 	}
 	.mui-table-view .mui-media-object{

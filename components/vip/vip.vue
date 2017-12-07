@@ -1,89 +1,70 @@
 <template>
-	<div>
-		
-		
-
-		<!-- 九宫格 -->
-		<p>vip</p>
-		<p>vip</p>
-		<p>vip</p>
-		<p>vip</p>
-		vip
-		vip
-
-
-		<!-- tab bar -->
-		
-	</div>
+	 <div class="slide_box">
+      <!-- 配置slider组件 -->
+	      <slider :pages="pages" :sliderinit="sliderinit">
+	          <!-- 设置loading,可自定义 -->
+	          <div slot="loading">loading...</div>
+	      </slider>
+	 </div>
 </template>
 <script>
-	export default {
-		data(){
-			return {
-				imgs:[]
-			}
-		},
-		created(){
-			
-			this.$ajax.get("/static/api/tu.json")
-				.then((response)=>{
-				    this.imgs = response.data.data;
-			  	})
-			  	.catch((error)=>{
-			    	console.log(error);
-			  	})
-			
-		}
-	}
+import slider from 'vue-concise-slider'
+  export default {
+    data() {
+    	return {
+      pages:[
+         	{
+	         	html: '<div class="slider1">slider1</div>',
+	          	style: {
+            		'background': '#1bbc9b'
+            	}
+          	},
+	        {
+	            html: '<div class="slider2">slider2</div>',
+	            style: {
+	              	'background': '#4bbfc3'
+	            }
+	        },
+          	{
+            	html: '<div class="slider3">slider3</div>',
+            	style: {
+              		'background': '#7baabe'
+            	}
+          	}
+        ],
+        //Sliding configuration [obj]
+        sliderinit: {
+          currentPage: 0,
+          thresholdDistance: 100,
+          thresholdTime: 500,
+          // autoplay:1000,
+          //loop:true,
+          direction:'vertical',
+          infinite:1,
+          slidesToScroll:1,
+          timingFunction: 'ease',
+          duration: 300
+        }
+      }
+    },
+    methods: {
+      onSliderChange(pagenum) {
+        this.sliderAt = pagenum
+      },
+      myalert() {
+        console.log('Click on ' + this.sliderAt)
+      }
+    },
+    components: {
+      slider
+    }
+  }
 </script>
-<style scoped>
+<style scoped lang='less'>
 
-	.swipe{
-		width: 100%;
-		height: 200px;
-	}
-	.swipe img{
-		width: 100%;
-	}
-	.mui-content{
-		background: none;
-	}
-	.mui-grid-view.mui-grid-9 .mui-table-view-cell{
-		border: none;
-	}
-	.mui-content > .mui-table-view:first-child{
-		margin-top: 0;
+	.slide_box{
+		height: 100%;
+		
 	}
 
-	.mui-icon{
-		width: 50px;
-		height: 50px;
-	}
-	
-	.mui-icon-home::before,
-	.mui-icon-email::before,
-	.mui-icon-chatbubble::before,
-	.mui-icon-location::before,
-	.mui-icon-search::before,
-	.mui-icon-phone::before{
-		content: "";
-	}
-	.mui-icon-home{
-		background: url("../../static/images/1.png") center no-repeat;
-	}
-	.mui-icon-email{
-		background: url("../../static/images/2.png") center no-repeat;
-	}
-	.mui-icon-chatbubble{
-		background: url("../../static/images/3.png") center no-repeat;
-	}
-	.mui-icon-location{
-		background: url("../../static/images/4.png") center no-repeat;
-	}
-	.mui-icon-search{
-		background: url("../../static/images/5.png") center no-repeat;
-	}
-	.mui-icon-phone{
-		background: url("../../static/images/6.png") center no-repeat;
-	}
 </style>
